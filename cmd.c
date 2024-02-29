@@ -79,6 +79,8 @@ void cmd_init(void)
     _cmd_init(&CMDS$$Base, &CMDS$$Limit);
 #elif defined (__ICCARM__) || defined(__ICCRX__)      /* for IAR Compiler */
     _cmd_init(__section_begin("CMDS"), __section_end("CMDS"));
+#elif defined(__GNUC__)                               /* GCC Compiler */
+    _cmd_init(&__start_CMDS, &__stop_CMDS);
 #endif
 
     for (index = _cmd_begin; index < _cmd_end; index = _get_next_cmd(index)) {

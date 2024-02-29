@@ -17,6 +17,11 @@
 #elif defined (__IAR_SYSTEMS_ICC__)             /* IAR Compiler */
     #define SECTION(x)                  @ x
     #define CMD_USED                    __root
+#elif defined(__GNUC__)                         /* GCC Compiler */
+    #define SECTION(x) __attribute__((section(x)))
+    #define CMD_USED __attribute__((used))
+    extern struct cmd_t __start_CMDS;
+    extern struct cmd_t __stop_CMDS;
 #else
     #error "not supported tool chain..."
 #endif
